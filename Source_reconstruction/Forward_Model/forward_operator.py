@@ -4,6 +4,7 @@ freesurfer_subjects_dir = "processed_t1_freesurfer_output/"
 output_dir="MEG_processed/Resting/forward_solution/"
 coreg_files= 'Resting/coregistration_files/'
 mindist = 5
+
 for i in range (subjects_list.shape[0]):
     subject_id= subjects_list.loc[i,'Id']
     print("processing subject:", subject_id)
@@ -28,3 +29,4 @@ for i in range (subjects_list.shape[0]):
     fwd = mne.make_forward_solution(fname_raw, fname_trans, fname_src, fname_bem, meg=True, eeg=False, mindist=mindist)
     
     mne.write_forward_solution(fname_fwd, fwd, overwrite=True)
+
