@@ -1,1 +1,1 @@
-# MEG-data-analysis-with-mne
+# MEG Data Analysis
