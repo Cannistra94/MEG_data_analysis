@@ -60,7 +60,20 @@ for i in range(subjects_list.shape[0]):
     
     del epochs
 
-    # --- Morph STCs to fsaverage ---
+    #save subject's STCs before morphing (will be used for connectivity estimation)
+    stc_list = []
+    native_out_dir = os.path.join (inverse_dir, subject_id, 'native_stcs')
+    for idx, stc in enumerate(stcs):
+        print(f'start morphing epoch {idx+1}')
+        # --- Save native STC before morphing ---
+        native_out_dir = os.path.join(inverse_dir, subject_id, "native_stcs")
+        os.makedirs(native_out_dir, exist_ok=True)
+        stc.save(
+            os.path.join(native_out_dir, f'native_dSPM_inverse_epoch{idx:03d}_{stc.subject}'),
+            overwrite=True
+        )
+
+    # --- Morph STCs to fsaverage --- save also morphed STCs in case needed
     src_fsaverage = mne.read_source_spaces(fname_fsaverage_src)
        
     morph_out_dir = os.path.join(morph_dir, subject_id)
@@ -86,3 +99,4 @@ for i in range(subjects_list.shape[0]):
         os.path.join(morph_out_dir, f'mne_dSPM_inverse_morph_epoch{idx:03d}_{stc.subject}'),
         overwrite=True)
         del stc, stc_fsaverage
+
