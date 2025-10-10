@@ -21,7 +21,6 @@ subjects_list = pd.read_csv("allsubj.csv", header=0)
 subjects_dir = "processed_t1_freesurfer_output/"
 inverse_dir = "8_inverse_solution"
 output_conn_dir = "11_connectivity_imaginary_coherence/"
-fname_fsaverage_src = os.path.join(subjects_dir, "fsaverage", "bem", "fsaverage-5-src.fif")
 os.makedirs(output_conn_dir, exist_ok=True)
 
 for i in range(subjects_list.shape[0]):
